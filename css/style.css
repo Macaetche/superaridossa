@@ -1,27 +1,23 @@
 /* =========================================================
    SuperÁridos — hoja de estilos
-   Paleta inspirada en el material: sedimento, basalto, óxido
-   de maquinaria y el Río Maipo.
+   Paleta fiel a la marca real: fondo claro, acento dorado
+   (#FFB400), tipografía Roboto / Open Sans.
    ========================================================= */
 
 :root {
   /* Color */
-  --color-bg:        #EDE6D8; /* polvo de árido / caliza */
-  --color-surface:   #F7F3EA; /* tarjetas sobre bg claro */
-  --color-ink:       #221E1A; /* texto principal */
-  --color-ink-soft:  #55504A;
-  --color-basalt:    #221F1C; /* fondo secciones oscuras */
-  --color-basalt-2:  #2E2A25;
-  --color-rust:      #B5551F; /* acento — óxido de maquinaria */
-  --color-rust-dark: #8F4218;
-  --color-river:     #33586A; /* acento — Río Maipo */
-  --color-line:      #D8CFBC; /* líneas sobre fondo claro */
-  --color-line-dark: #46413A; /* líneas sobre fondo oscuro */
+  --color-bg:        #FFFFFF; /* fondo general */
+  --color-surface:   #F5F4F0; /* tarjetas sobre bg claro */
+  --color-ink:       #1C1C1C; /* texto principal */
+  --color-ink-soft:  #5F6360;
+  --color-gold:      #FFB400; /* acento de marca */
+  --color-gold-dark: #8A5D00; /* variante con contraste sobre blanco */
+  --color-line:      #E3E1DA; /* líneas sobre fondo claro */
 
   /* Tipografía */
-  --font-display: "Big Shoulders Display", sans-serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: 'Roboto', Arial, sans-serif;
+  --font-body: 'Open Sans', Arial, sans-serif;
+  --font-label: 'Open Sans', Arial, sans-serif;
 
   /* Layout */
   --wrap: 1180px;
@@ -49,7 +45,7 @@ p:last-child { margin-bottom: 0; }
 
 .skip-link {
   position: absolute; left: -999px; top: 0;
-  background: var(--color-rust); color: #fff; padding: 0.75em 1em; z-index: 200;
+  background: var(--color-gold); color: #1C1C1C; padding: 0.75em 1em; z-index: 200;
 }
 .skip-link:focus { left: 0; }
 
@@ -60,17 +56,19 @@ p:last-child { margin-bottom: 0; }
 }
 
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.78rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-rust);
+  color: var(--color-gold-dark);
   margin: 0 0 0.9em;
 }
 
 .btn {
   display: inline-block;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -81,19 +79,20 @@ p:last-child { margin-bottom: 0; }
   transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 .btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--color-rust); color: #fff; }
-.btn-primary:hover { background: var(--color-rust-dark); }
+.btn-primary { background: var(--color-gold); color: #1C1C1C; }
+.btn-primary:hover { background: #E5A400; }
 .btn-ghost { border-color: currentColor; color: inherit; }
-.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+.btn-ghost:hover { background: rgba(28, 28, 28, 0.06); }
 
 /* ---------- Header ---------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(34, 30, 26, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(6px);
-  color: #F7F3EA;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
 }
 .header-inner {
   display: flex;
@@ -102,40 +101,30 @@ p:last-child { margin-bottom: 0; }
   height: 72px;
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
-.brand-mark {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--color-rust);
-  box-shadow: 0 0 0 4px rgba(181, 85, 31, 0.25);
-}
-.brand-text {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: 0.01em;
-}
-.brand-text em { color: var(--color-rust); font-style: normal; }
-.brand-text.small { font-size: 1.1rem; }
+.brand-logo { height: 40px; width: auto; }
+.brand-logo--footer { height: 32px; }
 
 .primary-nav { display: flex; align-items: center; gap: 28px; }
 .primary-nav a {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  color: rgba(247, 243, 234, 0.8);
+  color: var(--color-ink-soft);
   padding: 6px 0;
   border-bottom: 1px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.primary-nav a:hover { color: #fff; border-color: var(--color-rust); }
+.primary-nav a:hover { color: var(--color-ink); border-color: var(--color-gold); }
 .primary-nav a.nav-cta {
-  color: #fff;
-  background: var(--color-rust);
+  color: #1C1C1C;
+  background: var(--color-gold);
   padding: 8px 16px;
   border-radius: var(--radius);
 }
-.primary-nav a.nav-cta:hover { background: var(--color-rust-dark); border-color: transparent; }
+.primary-nav a.nav-cta:hover { background: #E5A400; border-color: transparent; }
 
 .nav-toggle {
   display: none;
@@ -146,12 +135,12 @@ p:last-child { margin-bottom: 0; }
   cursor: pointer;
   padding: 8px;
 }
-.nav-toggle span { width: 22px; height: 2px; background: #F7F3EA; display: block; }
+.nav-toggle span { width: 22px; height: 2px; background: var(--color-ink); display: block; }
 
 /* ---------- Hero ---------- */
 .hero {
-  background: linear-gradient(175deg, var(--color-basalt) 0%, var(--color-basalt-2) 100%);
-  color: #F7F3EA;
+  background: var(--color-bg);
+  color: var(--color-ink);
   padding-top: 88px;
   overflow: hidden;
 }
@@ -165,11 +154,11 @@ p:last-child { margin-bottom: 0; }
 .hero-copy h1 {
   font-size: clamp(2.6rem, 5vw, 4rem);
   line-height: 1.02;
-  color: #F7F3EA;
+  color: var(--color-ink);
   margin-bottom: 0.5em;
 }
 .hero-lede {
-  color: rgba(247, 243, 234, 0.78);
+  color: var(--color-ink-soft);
   font-size: 1.05rem;
   max-width: 46ch;
 }
@@ -178,42 +167,16 @@ p:last-child { margin-bottom: 0; }
   border-radius: var(--radius);
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border: 1px solid var(--color-line-dark);
+  border: 1px solid var(--color-line);
 }
 
-/* --- Escala granulométrica (elemento de firma) --- */
-.grain-scale {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  padding: 22px 24px 30px;
-  border-top: 1px solid var(--color-line-dark);
-}
-.grain-scale__label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(247, 243, 234, 0.5);
-}
-.grain-dot {
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: var(--color-rust);
-  opacity: 0.85;
-  flex-shrink: 0;
-}
-.grain-dot:nth-child(even) { background: var(--color-river); }
 
 /* ---------- Secciones genéricas ---------- */
 .section { padding: 96px 0; }
 .section--dark {
-  background: var(--color-basalt);
-  color: #F7F3EA;
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
-.section--dark .eyebrow { color: var(--color-rust); }
 
 .section-head { max-width: 62ch; margin-bottom: 3em; }
 .section-head h2 {
@@ -237,7 +200,8 @@ p:last-child { margin-bottom: 0; }
   border-top: 1px solid var(--color-line);
 }
 .stat dt {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -249,7 +213,7 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.35rem;
-  color: var(--color-rust-dark);
+  color: var(--color-gold-dark);
 }
 
 /* ---------- Servicios ---------- */
@@ -257,26 +221,33 @@ p:last-child { margin-bottom: 0; }
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
-  background: var(--color-line-dark);
-  border: 1px solid var(--color-line-dark);
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
 }
 .service-card {
-  background: var(--color-basalt);
+  background: var(--color-surface);
   padding: 2.6em;
 }
 .service-card__index {
   display: block;
-  font-family: var(--font-mono);
-  color: var(--color-rust);
+  font-family: var(--font-label);
+  font-weight: 600;
+  color: var(--color-gold-dark);
   font-size: 0.85rem;
   margin-bottom: 1em;
 }
+.service-card__icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.2em;
+}
+.service-card__icon svg { width: 100%; height: 100%; display: block; }
 .service-card h3 {
   font-size: 1.6rem;
-  color: #F7F3EA;
+  color: var(--color-ink);
   margin-bottom: 0.5em;
 }
-.service-card p { color: rgba(247, 243, 234, 0.72); max-width: 42ch; }
+.service-card p { color: var(--color-ink-soft); max-width: 42ch; }
 
 /* ---------- Productos ---------- */
 .product-grid {
@@ -299,14 +270,6 @@ p:last-child { margin-bottom: 0; }
   padding: 1.1em 1.3em;
 }
 .product-card__body h3 { font-size: 1.15rem; }
-.grain-indicator {
-  width: var(--size);
-  height: var(--size);
-  min-width: 4px;
-  border-radius: 50%;
-  background: var(--color-rust);
-  flex-shrink: 0;
-}
 
 /* ---------- Maquinaria ---------- */
 .machine-grid {
@@ -321,7 +284,7 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: 1em;
   filter: saturate(0.92);
 }
-.machine-card h3 { font-size: 1.15rem; color: #F7F3EA; }
+.machine-card h3 { font-size: 1.15rem; color: var(--color-ink); }
 
 /* ---------- Contacto ---------- */
 .contact-grid {
@@ -340,11 +303,12 @@ p:last-child { margin-bottom: 0; }
 }
 .contact-list__label {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-rust-dark);
+  color: var(--color-gold-dark);
   margin-bottom: 0.4em;
 }
 .contact-list a { text-decoration: none; }
@@ -361,7 +325,8 @@ p:last-child { margin-bottom: 0; }
 }
 .field { display: grid; gap: 0.5em; }
 .field label {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -377,21 +342,23 @@ p:last-child { margin-bottom: 0; }
   color: var(--color-ink);
 }
 .field input:focus, .field textarea:focus {
-  outline: 2px solid var(--color-rust);
+  outline: 2px solid var(--color-gold);
   outline-offset: 1px;
 }
 .contact-form .btn { justify-self: start; border: none; cursor: pointer; }
 .form-note {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.85rem;
-  color: var(--color-river);
+  color: var(--color-gold-dark);
   min-height: 1.2em;
 }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--color-basalt);
-  color: rgba(247, 243, 234, 0.6);
+  background: var(--color-bg);
+  color: var(--color-ink-soft);
+  border-top: 1px solid var(--color-line);
   padding: 40px 0;
 }
 .footer-inner {
@@ -426,17 +393,17 @@ p:last-child { margin-bottom: 0; }
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    background: var(--color-basalt);
-    border-top: 1px solid var(--color-line-dark);
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-line);
+    box-shadow: 0 8px 16px rgba(28, 28, 28, 0.08);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;
   }
   .primary-nav.is-open { max-height: 320px; }
-  .primary-nav a { width: 100%; padding: 14px 24px; border-bottom: 1px solid var(--color-line-dark); }
+  .primary-nav a { width: 100%; padding: 14px 24px; border-bottom: 1px solid var(--color-line); }
   .primary-nav a.nav-cta { border-radius: 0; text-align: center; }
 
   .product-grid, .machine-grid { grid-template-columns: 1fr; }
-  .grain-scale { gap: 10px; padding-inline: 16px; }
   .section { padding: 64px 0; }
 }
