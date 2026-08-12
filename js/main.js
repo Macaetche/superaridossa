@@ -66,18 +66,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const plusBtn = card.querySelector('.qty-btn--plus');
     const qtyInput = card.querySelector('.qty-input');
     const addBtn = card.querySelector('.btn-add');
+    const totalEl = card.querySelector('.product-card__total');
+    const unitM3 = totalEl ? Number(totalEl.dataset.unitM3) : 0;
     const productName = card.dataset.product;
 
     if (!minusBtn || !plusBtn || !qtyInput || !addBtn) return;
 
+    const updateTotal = () => {
+      if (!totalEl) return;
+      const cantidad = Number(qtyInput.value) || 0;
+      totalEl.textContent = `= ${cantidad * unitM3} m³ totales`;
+    };
+
     minusBtn.addEventListener('click', () => {
       const next = Number(qtyInput.value) - 1;
       qtyInput.value = Math.max(1, next);
+      updateTotal();
     });
 
     plusBtn.addEventListener('click', () => {
       qtyInput.value = Number(qtyInput.value) + 1;
+      updateTotal();
     });
+
+    qtyInput.addEventListener('input', updateTotal);
 
     addBtn.addEventListener('click', () => {
       const cantidad = Number(qtyInput.value);
@@ -98,8 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         addBtn.textContent = 'Agregar al carrito';
         addBtn.disabled = false;
         qtyInput.value = 1;
+        updateTotal();
       }, 1000);
     });
+
+    updateTotal();
   });
 
   updateCartCount();
