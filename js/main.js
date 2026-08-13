@@ -25,20 +25,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Campo condicional: cantidad de metros cúbicos (solo para venta de áridos)
+  // Campos condicionales: material y cantidad (solo para venta de áridos)
   const asuntoSelect = document.getElementById('asunto');
+  const materialField = document.getElementById('materialField');
+  const materialSelect = document.getElementById('material');
   const cantidadField = document.getElementById('cantidadField');
   const cantidadInput = document.getElementById('cantidad');
+  const cantidadTotal = document.getElementById('cantidadTotal');
+  const CONTACT_UNIT_M3 = 6;
 
-  if (asuntoSelect && cantidadField && cantidadInput) {
-    const toggleCantidad = () => {
+  if (asuntoSelect && materialField && materialSelect && cantidadField && cantidadInput) {
+    const updateCantidadTotal = () => {
+      if (!cantidadTotal) return;
+      const cantidad = Number(cantidadInput.value) || 0;
+      cantidadTotal.textContent = `= ${cantidad * CONTACT_UNIT_M3} m³ totales`;
+    };
+
+    const toggleVentaFields = () => {
       const show = asuntoSelect.value === 'Venta de áridos';
+      materialField.hidden = !show;
+      materialSelect.required = show;
       cantidadField.hidden = !show;
       cantidadInput.required = show;
-      if (!show) cantidadInput.value = '';
+      if (!show) {
+        materialSelect.value = '';
+        cantidadInput.value = '';
+      } else if (!cantidadInput.value) {
+        cantidadInput.value = 1;
+      }
+      updateCantidadTotal();
     };
-    asuntoSelect.addEventListener('change', toggleCantidad);
-    toggleCantidad();
+
+    asuntoSelect.addEventListener('change', toggleVentaFields);
+    cantidadInput.addEventListener('input', updateCantidadTotal);
+    toggleVentaFields();
   }
 
   // Carrito de cotización (guardado en localStorage)
@@ -99,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const cart = readCart();
-      cart.push({ producto: productName, cantidad });
+      cart.push({ producto: productName, cantidad, m3: cantidad * unitM3 });
       saveCart(cart);
       updateCartCount();
 
@@ -125,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartOverlay = document.getElementById('cartOverlay');
   const cartDrawerClose = document.getElementById('cartDrawerClose');
   const cartItemsEl = document.getElementById('cartItems');
+  const cartTotalEl = document.getElementById('cartTotal');
   const cartEmptyEl = document.getElementById('cartEmpty');
   const cartForm = document.getElementById('cartForm');
   const cartFormNote = document.getElementById('cartFormNote');
@@ -136,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cart.length === 0) {
       cartItemsEl.hidden = true;
+      if (cartTotalEl) cartTotalEl.hidden = true;
       cartEmptyEl.hidden = false;
       return;
     }
@@ -143,18 +165,29 @@ document.addEventListener('DOMContentLoaded', () => {
     cartItemsEl.hidden = false;
     cartEmptyEl.hidden = true;
 
+    let totalM3 = 0;
+
     cart.forEach((item, index) => {
+      // item.m3 puede no existir en carritos guardados antes de este cálculo
+      const m3 = item.m3 ?? item.cantidad * 6;
+      totalM3 += m3;
+
       const li = document.createElement('li');
       li.className = 'cart-item';
       li.innerHTML = `
         <div class="cart-item__info">
           <span class="cart-item__name">${item.producto}</span>
-          <span class="cart-item__qty">${item.cantidad} m³</span>
+          <span class="cart-item__qty">${item.cantidad} camionada${item.cantidad === 1 ? '' : 's'} · ${m3} m³</span>
         </div>
         <button type="button" class="cart-item__remove" data-index="${index}" aria-label="Quitar ${item.producto}">&times;</button>
       `;
       cartItemsEl.appendChild(li);
     });
+
+    if (cartTotalEl) {
+      cartTotalEl.hidden = false;
+      cartTotalEl.innerHTML = `Total: <strong>${totalM3} m³</strong>`;
+    }
   };
 
   const openCart = () => {

@@ -60,6 +60,7 @@
 
       <div class="cart-drawer__body">
         <ul class="cart-items" id="cartItems" hidden></ul>
+        <p class="cart-total" id="cartTotal" hidden></p>
         <p class="cart-empty" id="cartEmpty">Todavía no agregaste productos.</p>
 
         <form class="cart-form" id="cartForm" novalidate>
@@ -223,9 +224,9 @@
             </div>
           </li>
 
-          <li class="product-card" data-product="Barra">
+          <li class="product-card" data-product="Borra">
             <div class="product-card__media">
-              <img src="https://static.wixstatic.com/media/ffcc2a_268f34e2dd2942129bdec415f42c7d4d~mv2_d_1252_1280_s_2.jpg/v1/fill/w_400,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG-20170601-WA0032.jpg" alt="Barra" loading="lazy" width="400" height="330">
+              <img src="https://static.wixstatic.com/media/ffcc2a_268f34e2dd2942129bdec415f42c7d4d~mv2_d_1252_1280_s_2.jpg/v1/fill/w_400,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG-20170601-WA0032.jpg" alt="Borra" loading="lazy" width="400" height="330">
             </div>
             <div class="product-card__body">
               <h3>Borra</h3>
@@ -415,29 +416,47 @@
         </div>
 
         <form class="contact-form" id="contactForm" novalidate>
+          <p class="form-disclaimer">Los campos con * son obligatorios.</p>
           <div class="field">
-            <label for="nombre">Nombre</label>
+            <label for="nombre">Nombre *</label>
             <input type="text" id="nombre" name="nombre" autocomplete="name" required>
           </div>
           <div class="field">
-            <label for="email">Email</label>
+            <label for="email">Email *</label>
             <input type="email" id="email" name="email" autocomplete="email" required>
           </div>
           <div class="field">
-            <label for="asunto">Asunto</label>
-            <select id="asunto" name="asunto">
+            <label for="telefono">Teléfono *</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+          </div>
+          <div class="field">
+            <label for="asunto">Asunto *</label>
+            <select id="asunto" name="asunto" required>
               <option value="">Seleccione una opción</option>
               <option value="Venta de áridos">Venta de áridos</option>
               <option value="Arriendo de maquinaria">Arriendo de maquinaria</option>
             </select>
           </div>
+          <div class="field" id="materialField" hidden>
+            <label for="material">Material *</label>
+            <select id="material" name="material">
+              <option value="">Seleccione un material</option>
+              <option value="Arena">Arena</option>
+              <option value="Borra">Borra</option>
+              <option value="Grava">Grava</option>
+              <option value="Estabilizado">Estabilizado</option>
+              <option value="Bolón">Bolón</option>
+              <option value="Gravilla">Gravilla</option>
+            </select>
+          </div>
           <div class="field" id="cantidadField" hidden>
-            <label for="cantidad">Cantidad de metros cúbicos</label>
-            <input type="number" id="cantidad" name="cantidad" min="0" step="0.1">
+            <label for="cantidad">Cantidad de camionadas (6 m³ c/u) *</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" step="1" value="1">
+            <p class="field-note" id="cantidadTotal">= 6 m³ totales</p>
           </div>
           <div class="field">
             <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+            <textarea id="mensaje" name="mensaje" rows="4"></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Enviar</button>
           <p class="form-note" id="formNote" role="status" aria-live="polite"></p>

@@ -132,8 +132,8 @@ p:last-child { margin-bottom: 0; }
   height: 18px;
   padding: 0 5px;
   border-radius: 999px;
-  background: var(--color-gold);
-  color: #1C1C1C;
+  background: var(--color-gold-dark);
+  color: #fff;
   font-family: var(--font-label);
   font-weight: 700;
   font-size: 0.7rem;
@@ -413,6 +413,12 @@ p:last-child { margin-bottom: 0; }
   gap: 1.2em;
   align-content: start;
 }
+.form-disclaimer {
+  margin: -0.4em 0 0;
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
 .field { display: grid; gap: 0.5em; }
 .field[hidden] { display: none; }
 .field label {
@@ -436,6 +442,12 @@ p:last-child { margin-bottom: 0; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: 2px solid var(--color-gold);
   outline-offset: 1px;
+}
+.field-note {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gold-dark);
 }
 .contact-form .btn { justify-self: start; border: none; cursor: pointer; }
 .form-note {
@@ -546,6 +558,17 @@ p:last-child { margin-bottom: 0; }
 
 .cart-empty { color: var(--color-ink-soft); font-size: 0.9rem; }
 .cart-empty[hidden] { display: none; }
+
+.cart-total {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-line);
+  text-align: right;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+}
+.cart-total strong { color: var(--color-gold-dark); }
+.cart-total[hidden] { display: none; }
 
 .cart-form { display: grid; gap: 1.2em; }
 .cart-form .btn { justify-self: start; border: none; cursor: pointer; }
