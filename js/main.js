@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!cartForm.checkValidity()) {
-        cartFormNote.textContent = 'Por favor ingresa un email válido.';
+        cartFormNote.textContent = 'Por favor completa los campos obligatorios.';
         cartFormNote.style.color = '#B5551F';
         return;
       }
